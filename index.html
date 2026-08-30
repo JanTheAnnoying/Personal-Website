@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jan's Kugelblitz</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- =========================
+       MAIN PROFILE CARD
+       ========================= -->
+
+  <main class="card">
+
+    <img src="assets/profile.png" alt="Profile picture" class="profile">
+
+    <h1>Jan (January)</h1>
+
+    <p class="bio">
+      SHS Student • Budget Tech Support • Science Enjoyer • Tutor
+    </p>
+
+    <div class="links">
+
+      <button id="aboutButton" class="button">
+        About Me
+      </button>
+
+      <button id="projectsButton" class="button">
+        My Projects
+      </button>
+
+      <button id="achievementsButton" class="button">
+        Achievements
+      </button>
+
+      <button id="gamesButton" class="button">
+        Games
+      </button>
+
+      <button id="galleryButton" class="button">
+        Gallery
+      </button>
+
+      <button id="socialsButton" class="button">
+        Socials
+      </button>
+
+    </div>
+
+    <p class="footer">
+      cogito, ergo sum
+    </p>
+
+  </main>
+
+
+  <!-- =========================
+       ABOUT ME GUI
+       ========================= -->
+
+  <div id="aboutModal" class="modal">
+
+    <div class="gui-box">
+
+      <button id="closeAboutButton" class="close-button">
+        ×
+      </button>
+
+      <h2>About Me</h2>
+
+      <div class="gui-content">
+
+        <p>
+          I'm Jan, a Grade 12 STEM student from the Philippines with
+          an interest in physics, astronomy, technology, programming,
+          and pretty much anything that makes me ask "how does this work?"
+        </p>
+
+        <p>
+          I'm currently aiming toward studying Physics or Astrophysics
+          in university. Outside academics, I'm usually gaming,
+          programming, messing with computers, teaching someone
+          something, or going down an extremely specific rabbit hole.
+        </p>
+
+        <h3>Interests</h3>
+        <p>
+          🔭 Astronomy & Astrophysics<br>
+          ⚛️ Physics & Chemistry<br>
+          📐 Mathematics<br>
+          💻 Programming<br>
+          🖥️ PC Hardware<br>
+          🎮 Gaming<br>
+          📚 History<br>
+          💰 Economics<br>
+          🏛️ Political Science
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       PROJECTS GUI
+       ========================= -->
+
+  <div id="projectsModal" class="modal">
+
+    <div class="gui-box">
+
+      <button id="closeProjectsButton" class="close-button">
+        ×
+      </button>
+
+      <h2>My Projects</h2>
+
+      <div class="gui-content">
+
+        <div class="project-card">
+
+          <h3>Jan's UPCAT Review Center</h3>
+
+          <p>
+            A free review center created to help students prepare
+            for the UPCAT through guided lessons, practice tests,
+            and review sessions.
+          </p>
+
+        </div>
+
+
+        <div class="project-card">
+
+          <h3>Discord Bot Projects</h3>
+
+          <p>
+            Various Discord bot projects involving APIs,
+            automation, commands, and server utilities.
+          </p>
+
+        </div>
+
+
+        <div class="project-card">
+
+          <h3>PANDEMONIUM</h3>
+
+          <p>
+            A discontinued game project where I worked as the
+            lead developer.
+          </p>
+
+        </div>
+
+
+        <div class="project-card">
+
+          <h3>Critical Story: Renewance</h3>
+
+          <p>
+            A game project where I worked as a co-developer.
+          </p>
+
+        </div>
+
+
+        <div class="project-card">
+
+          <h3>This Website</h3>
+
+          <p>
+            You're looking at it right now.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       ACHIEVEMENTS GUI
+       ========================= -->
+
+  <div id="achievementsModal" class="modal">
+
+    <div class="gui-box">
+
+      <button id="closeAchievementsButton" class="close-button">
+        ×
+      </button>
+
+      <h2>Achievements</h2>
+
+      <div class="gui-content">
+
+        <h3>Academic / IRL</h3>
+
+        <ul>
+          <li>Consistent With High Honors / Highest Honors</li>
+          <li>Salutatorian</li>
+          <li>Winner of the 10th Grade Science Quiz Bee</li>
+          <li>Top 1 in Grade 7</li>
+          <li>Top 1 in Grade 10</li>
+          <li>Frequent Math Quiz Bee participant</li>
+          <li>Included in the Star Section</li>
+          <li>Highest in STEM</li>
+          <li>STI Tagisan ng Talino: ThinkQuest First Runner-up</li>
+        </ul>
+
+
+        <h3>Online</h3>
+
+        <ul>
+          <li>KC & OOB for 2 years at PMEBGE</li>
+          <li>Administrator for 9 months at PMEBGE</li>
+          <li>Lead Developer of PANDEMONIUM</li>
+          <li>Co-Developer of Critical Story: Renewance</li>
+          <li>No-Brain Games/PurpleByte Staff for 8 months (ongoing)</li>
+        </ul>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       GAMES GUI
+       ========================= -->
+
+  <div id="gamesModal" class="modal">
+
+    <div class="gui-box">
+
+      <button id="closeGamesButton" class="close-button">
+        ×
+      </button>
+
+      <h2>Games</h2>
+
+      <div class="gui-content">
+
+        <p>
+          Games I usually play:
+        </p>
+
+        <div class="game-list">
+
+          <div class="game-card">
+            <h3>Decaying Winter</h3>
+          </div>
+
+          <div class="game-card">
+            <h3>Raid Boss Destiny</h3>
+          </div>
+
+          <div class="game-card">
+            <h3>Randomly Generated Droids</h3>
+          </div>
+
+          <div class="game-card">
+            <h3>Dummies vs Noobs</h3>
+          </div>
+
+          <div class="game-card">
+            <h3>Mutation</h3>
+          </div>
+
+          <div class="game-card">
+            <h3>Minecraft</h3>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+     GALLERY GUI
+     ========================= -->
+
+<div id="galleryModal" class="modal">
+
+  <div class="gui-box">
+
+    <button id="closeGalleryButton" class="close-button">
+      ×
+    </button>
+
+    <h2>Gallery</h2>
+
+    <div class="gui-content">
+
+      <p>
+        Photos and other things I'll eventually put here.
+      </p>
+
+      <div class="gallery">
+
+        <img
+          src="assets/gallery1.jpg"
+          alt="Gallery image 1"
+          class="gallery-image"
+        >
+
+        <img
+          src="assets/gallery2.png"
+          alt="Gallery image 2"
+          class="gallery-image"
+        >
+
+        <img
+          src="assets/gallery3.png"
+          alt="Gallery image 3"
+          class="gallery-image"
+        >
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- =========================
+     GALLERY GUI
+     ========================= -->
+
+<div id="galleryModal" class="modal">
+
+  <div class="gui-box">
+
+    <button id="closeGalleryButton" class="close-button">
+      ×
+    </button>
+
+    <h2>Gallery</h2>
+
+    <div class="gui-content">
+
+      <p>
+        Photos and other things I'll eventually put here.
+      </p>
+
+      <div class="gallery">
+
+        <img
+          src="assets/gallery1.jpg"
+          alt="Gallery image 1"
+          class="gallery-image"
+        >
+
+        <img
+          src="assets/gallery2.png"
+          alt="Gallery image 2"
+          class="gallery-image"
+        >
+
+        <img
+          src="assets/gallery3.png"
+          alt="Gallery image 3"
+          class="gallery-image"
+        >
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+  <!-- =========================
+       SOCIALS GUI
+       ========================= -->
+
+  <div id="socialsModal" class="modal">
+
+    <div class="gui-box">
+
+      <button id="closeSocialsButton" class="close-button">
+        ×
+      </button>
+
+      <h2>Socials</h2>
+
+      <div class="gui-content">
+
+        <a
+          href="https://www.roblox.com/users/563117206/profile"
+          target="_blank"
+          class="social-button">
+          Roblox
+        </a>
+
+        <a
+          href="https://www.youtube.com/@JanTheAnnoying"
+          target="_blank"
+          class="social-button">
+          YouTube
+        </a>
+
+        <a
+          href="https://discord.com/"
+          target="_blank"
+          class="social-button">
+          Discord
+        </a>
+
+        <p class="social-note">
+          Username: <b>Jan_uary.</b>
+        </p>
+
+        <p class="social-note">
+          Other username: <b>JanTheAnnoying</b>
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>
