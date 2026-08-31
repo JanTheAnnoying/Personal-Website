@@ -4,15 +4,11 @@
 
 body {
   margin: 0;
-
   min-height: 100vh;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   font-family: Arial, sans-serif;
-
   color: white;
 
   background:
@@ -25,31 +21,42 @@ body {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+
+  overflow-x: hidden;
 }
 
-
-/* =========================
+/* =========================================================
    MAIN CARD
-   ========================= */
+   ========================================================= */
 
 .card {
   width: min(420px, 90%);
-
   padding: 40px;
 
   text-align: center;
 
   background: rgba(20, 20, 30, 0.65);
-
   border: 1px solid rgba(255, 255, 255, 0.15);
-
   border-radius: 22px;
 
   backdrop-filter: blur(12px);
 
   box-shadow:
     0 20px 50px rgba(0, 0, 0, 0.45);
+
+  transform: translateX(0);
+
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+.card.card-shifted {
+  transform: translateX(-210px);
+}
+
+/* =========================================================
+   PROFILE
+   ========================================================= */
 
 .profile {
   width: 120px;
@@ -58,7 +65,6 @@ body {
   object-fit: cover;
 
   border-radius: 50%;
-
   border: 3px solid rgba(255, 255, 255, 0.75);
 
   margin-bottom: 15px;
@@ -66,48 +72,39 @@ body {
 
 h1 {
   margin: 5px 0;
-
   font-size: 32px;
 }
 
 .bio {
   opacity: 0.75;
-
   margin-bottom: 28px;
 }
 
-
-/* =========================
+/* =========================================================
    MAIN BUTTONS
-   ========================= */
+   ========================================================= */
 
 .links {
   display: flex;
-
   flex-direction: column;
-
   gap: 12px;
 }
 
 .button {
   display: block;
-
   width: 100%;
 
   padding: 14px 20px;
 
   color: white;
-
   text-decoration: none;
 
   font-family: Arial, sans-serif;
-
   font-size: 16px;
 
   background: rgba(255, 255, 255, 0.10);
 
   border: 1px solid rgba(255, 255, 255, 0.15);
-
   border-radius: 12px;
 
   cursor: pointer;
@@ -119,96 +116,173 @@ h1 {
 
 .button:hover {
   transform: translateY(-3px);
-
   background: rgba(255, 255, 255, 0.20);
 }
 
-
-/* =========================
+/* =========================================================
    FOOTER
-   ========================= */
+   ========================================================= */
 
 .footer {
   margin-top: 30px;
-
   font-size: 12px;
-
   opacity: 0.45;
 }
 
-
-/* =========================
-   GUI / MODALS
-   ========================= */
+/* =========================================================
+   MODAL LAYER
+   
+   IMPORTANT:
+   This covers the screen visually, but DOES NOT block
+   clicks. Only .gui-box receives pointer events.
+   ========================================================= */
 
 .modal {
-  display: none;
-
   position: fixed;
-
   inset: 0;
 
   z-index: 1000;
 
-  justify-content: center;
-  align-items: center;
+  display: none;
 
-  padding: 20px;
+  background: transparent;
 
-  background: rgba(0, 0, 0, 0.55);
-
-  backdrop-filter: blur(6px);
+  pointer-events: none;
 }
 
-.gui-box {
-  position: relative;
+.modal.active {
+  display: block;
+  pointer-events: none;
+}
 
-  width: min(650px, 95%);
+/* =========================================================
+   GUI WINDOW
+   ========================================================= */
 
+.modal .gui-box {
+  position: fixed;
+
+  top: 50%;
+  left: calc(50% + 30px);
+
+  width: min(650px, 48vw);
   max-height: 85vh;
 
-  overflow-y: auto;
+  transform: translateY(-50%);
 
   padding: 35px;
+
+  overflow-y: auto;
 
   color: white;
 
   background: rgba(20, 20, 30, 0.92);
 
   border: 1px solid rgba(255, 255, 255, 0.15);
-
   border-radius: 20px;
 
   box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.5);
 
-  animation: guiAppear 0.25s ease;
+  pointer-events: auto;
+
+  animation:
+    guiAppear 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+.modal .gui-box::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal .gui-box::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 10px;
+}
+
+.modal .gui-box::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.20);
+  border-radius: 10px;
+}
+
+.modal .gui-box::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.32);
+}
+
+/* Firefox */
+
+.modal .gui-box {
+  scrollbar-width: thin;
+  scrollbar-color:
+    rgba(255, 255, 255, 0.20)
+    rgba(255, 255, 255, 0.04);
+}
+
+/* =========================================================
+   GUI ANIMATION
+   ========================================================= */
+
+@keyframes guiAppear {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(-50%)
+      translateX(30px)
+      scale(0.94);
+
+    filter: blur(5px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(-50%)
+      translateX(0)
+      scale(1);
+
+    filter: blur(0);
+  }
+}
+
+/* =========================================================
+   GUI HEADINGS
+   ========================================================= */
 
 .gui-box h2 {
   margin-top: 0;
-
   margin-bottom: 25px;
-
   font-size: 30px;
 }
 
 .gui-box h3 {
   margin-top: 25px;
-
   font-size: 19px;
 }
 
-.gui-content {
-  line-height: 1.6;
+/* =========================================================
+   GUI CONTENT
+   ========================================================= */
 
+.gui-content {
+  padding: 20px;
+
+  background: rgba(255, 255, 255, 0.07);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+
+  line-height: 1.6;
   text-align: left;
 }
 
-
-/* =========================
+/* =========================================================
    CLOSE BUTTON
-   ========================= */
+   ========================================================= */
 
 .close-button {
   position: absolute;
@@ -220,40 +294,36 @@ h1 {
   height: 35px;
 
   border: none;
-
   border-radius: 50%;
 
   color: white;
-
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.10);
 
   font-size: 24px;
 
   cursor: pointer;
 
   transition: 0.2s;
+
+  z-index: 20;
 }
 
 .close-button:hover {
-  background: rgba(255, 255, 255, 0.2);
-
+  background: rgba(255, 255, 255, 0.20);
   transform: rotate(90deg);
 }
 
-
-/* =========================
+/* =========================================================
    PROJECT CARDS
-   ========================= */
+   ========================================================= */
 
 .project-card {
   margin-bottom: 15px;
-
   padding: 20px;
 
   background: rgba(255, 255, 255, 0.07);
 
   border: 1px solid rgba(255, 255, 255, 0.08);
-
   border-radius: 12px;
 
   transition:
@@ -263,26 +333,21 @@ h1 {
 
 .project-card:hover {
   transform: translateY(-3px);
-
   background: rgba(255, 255, 255, 0.11);
 }
 
 .project-card h3 {
   margin-top: 0;
-
   margin-bottom: 8px;
 }
 
-
-/* =========================
+/* =========================================================
    GAME CARDS
-   ========================= */
+   ========================================================= */
 
 .game-list {
   display: grid;
-
   grid-template-columns: repeat(2, 1fr);
-
   gap: 12px;
 }
 
@@ -302,71 +367,63 @@ h1 {
 
 .game-card:hover {
   transform: translateY(-3px);
-
   background: rgba(255, 255, 255, 0.12);
 }
 
 .game-card h3 {
   margin: 0;
-
   font-size: 15px;
 }
 
-
-/* =========================
+/* =========================================================
    GALLERY
-   ========================= */
+   ========================================================= */
 
 .gallery {
   display: grid;
-
   grid-template-columns: repeat(2, 1fr);
-
   gap: 12px;
 }
 
-.gallery img {
-  width: 100%;
+.gallery-image {
+  display: block;
 
+  width: 100%;
   aspect-ratio: 1 / 1;
 
   object-fit: cover;
 
   border-radius: 12px;
 
+  cursor: pointer;
+
   transition:
     transform 0.2s,
     opacity 0.2s;
 }
 
-.gallery img:hover {
+.gallery-image:hover {
   transform: scale(1.03);
-
   opacity: 0.85;
 }
 
-
-/* =========================
+/* =========================================================
    SOCIAL BUTTONS
-   ========================= */
+   ========================================================= */
 
 .social-button {
   display: block;
 
   margin-bottom: 12px;
-
   padding: 14px 20px;
 
   color: white;
-
   text-decoration: none;
-
   text-align: center;
 
   background: rgba(255, 255, 255, 0.10);
 
   border: 1px solid rgba(255, 255, 255, 0.15);
-
   border-radius: 12px;
 
   transition:
@@ -376,393 +433,218 @@ h1 {
 
 .social-button:hover {
   transform: translateY(-3px);
-
   background: rgba(255, 255, 255, 0.20);
 }
 
 .social-note {
   text-align: center;
-
   opacity: 0.7;
 }
 
+/* =========================================================
+   IMAGE VIEWER POPUP
+   ========================================================= */
 
-/* =========================
-   ANIMATION
-   ========================= */
-
-@keyframes guiAppear {
-
-  from {
-    opacity: 0;
-
-    transform: scale(0.92);
-  }
-
-  to {
-    opacity: 1;
-
-    transform: scale(1);
-  }
-
-}
-
-
-/* =========================
-   MOBILE
-   ========================= */
-
-@media (max-width: 500px) {
-
-  .card {
-    padding: 30px 25px;
-  }
-
-  .gui-box {
-    padding: 30px 22px;
-  }
-
-  .game-list {
-    grid-template-columns: 1fr;
-  }
-
-}
-
-/* =========================
-   GUI CONTENT FRAME
-   ========================= */
-
-.gui-content {
-  padding: 20px;
-
-  background: rgba(255, 255, 255, 0.07);
-
-  border: 1px solid rgba(255, 255, 255, 0.08);
-
-  border-radius: 14px;
-
-  line-height: 1.6;
-
-  text-align: left;
-}
-
-
-/* =========================
-   GUI ANIMATION
-   ========================= */
-
-@keyframes guiAppear {
-  from {
-    opacity: 0;
-    transform: scale(0.85) translateY(15px);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-.gui-box {
-  animation: guiAppear 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-/* =========================
-   CLICKABLE GALLERY
-   ========================= */
-
-.gallery-image {
-  display: block;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: transform 0.2s, opacity 0.2s;
-}
-
-.gallery-image:hover {
-  transform: scale(1.03);
-  opacity: 0.85;
-}
-
-
-/* =========================
-   FULLSCREEN IMAGE VIEWER
-   ========================= */
-
-.fullscreen-viewer {
+.image-viewer-window {
   position: fixed;
-  inset: 0;
 
-  width: 100vw;
-  height: 100vh;
+  top: 50%;
+  left: 50%;
+
+  width: min(900px, 85vw);
+  height: min(650px, 85vh);
+
+  transform: translate(-50%, -50%);
+
+  padding: 25px;
 
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
 
-  padding: 40px;
-
-  background: rgba(0, 0, 0, 0.95);
-
-  /* VERY IMPORTANT */
-  z-index: 2147483647;
-}
-
-.fullscreen-viewer img {
-  display: block;
-
-  width: auto;
-  height: auto;
-
-  max-width: calc(100vw - 80px);
-  max-height: calc(100vh - 80px);
-
-  object-fit: contain;
-
-  border-radius: 10px;
-
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
-}
-
-.fullscreen-close {
-  position: absolute;
-
-  top: 20px;
-  right: 25px;
-
-  width: 45px;
-  height: 45px;
-
-  border: none;
-  border-radius: 50%;
-
-  color: white;
-  background: rgba(255, 255, 255, 0.15);
-
-  font-size: 30px;
-
-  cursor: pointer;
-
-  z-index: 2147483647;
-}
-
-.fullscreen-close:hover {
-  background: rgba(255, 255, 255, 0.25);
-}
-
-/* =========================
-   IMAGE VIEWER CLOSE BUTTON
-   ========================= */
-
-.image-viewer-close {
-  position: absolute;
-
-  top: 20px;
-  right: 25px;
-
-  width: 45px;
-  height: 45px;
-
-  border: none;
-  border-radius: 50%;
+  overflow: hidden;
 
   color: white;
 
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(15, 15, 22, 0.96);
 
-  font-size: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
 
-  cursor: pointer;
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.75);
 
-  z-index: 100000;
+  z-index: 99999;
+
+  pointer-events: auto;
+
+  animation:
+    imageViewerAppear
+    0.3s
+    cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.image-viewer-close:hover {
-  background: rgba(255, 255, 255, 0.25);
-}
-/* =========================
-   CLOSE BUTTON
-   ========================= */
 
-.image-viewer-close {
-  position: absolute;
+/* =========================================================
+   DARK + BLURRED BACKGROUND
+   ========================================================= */
 
-  top: 20px;
-  right: 25px;
+.image-viewer-window::before {
+  content: "";
 
-  width: 45px;
-  height: 45px;
+  position: fixed;
 
-  border: none;
-  border-radius: 50%;
+  inset: 0;
 
-  color: white;
-  background: rgba(255, 255, 255, 0.12);
+  z-index: -1;
 
-  font-size: 30px;
+  background:
+    rgba(0, 0, 0, 0.72);
 
-  cursor: pointer;
+  backdrop-filter: blur(10px);
 
-  z-index: 10000;
+  -webkit-backdrop-filter: blur(10px);
+
+  pointer-events: none;
 }
 
-.image-viewer-close:hover {
-  background: rgba(255, 255, 255, 0.25);
-}
-/* =========================
-   IMAGE ANIMATIONS
-   ========================= */
+
+/* =========================================================
+   IMAGE VIEWER ANIMATION
+   ========================================================= */
 
 @keyframes imageViewerAppear {
 
   from {
     opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      scale(0.92);
+
+    filter: blur(5px);
   }
 
   to {
     opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+
+    filter: blur(0);
   }
 
 }
 
-@keyframes imageAppear {
 
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
+/* =========================================================
+   IMAGE VIEWER HEADER
+   ========================================================= */
 
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+.image-viewer-header {
+  flex: 0 0 auto;
 
+  padding:
+    0
+    55px
+    18px
+    0;
 }
 
-/* =========================
-   FULLSCREEN IMAGE VIEWER
-   ========================= */
+.image-viewer-header h2 {
+  margin: 0 0 8px 0;
 
-.fullscreen-viewer {
-    width: 100vw;
-    height: 100vh;
+  font-size: 28px;
+  line-height: 1.25;
+}
 
-    max-width: none;
-    max-height: none;
+.image-viewer-header p {
+  margin: 0;
 
-    margin: 0;
-    padding: 40px;
+  color:
+    rgba(255, 255, 255, 0.70);
 
-    border: none;
-
-    background: rgba(0, 0, 0, 0.95);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  font-size: 15px;
+  line-height: 1.5;
 }
 
 
-/* Remove browser dialog backdrop */
+/* =========================================================
+   IMAGE FRAME
+   ========================================================= */
 
-.fullscreen-viewer::backdrop {
-    background: rgba(0, 0, 0, 0.95);
-}
+.image-frame {
+  flex: 1 1 auto;
 
+  min-height: 0;
+  width: 100%;
 
-/* Full image */
+  display: flex;
 
-.fullscreen-image {
-    display: block;
-
-    width: auto;
-    height: auto;
-
-    max-width: calc(100vw - 80px);
-    max-height: calc(100vh - 80px);
-
-    object-fit: contain;
-
-    border-radius: 10px;
-
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
-}
-
-
-/* Close button */
-
-.fullscreen-close {
-    position: absolute;
-
-    top: 20px;
-    right: 25px;
-
-    width: 45px;
-    height: 45px;
-
-    border: none;
-    border-radius: 50%;
-
-    color: white;
-
-    background: rgba(255, 255, 255, 0.15);
-
-    font-size: 30px;
-
-    cursor: pointer;
-
-    z-index: 10;
-}
-
-
-.fullscreen-close:hover {
-    background: rgba(255, 255, 255, 0.3);
-}
-/* =========================
-   IMAGE VIEWER
-   ========================= */
-
-.fullscreen-viewer {
-  width: min(1100px, 92vw);
-  height: min(720px, 88vh);
-
-  margin: auto;
-  padding: 25px;
-
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 20px;
-
-  color: white;
-
-  background: rgba(20, 20, 30, 0.65);
-
-  backdrop-filter: blur(12px);
-
-  box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
 
   overflow: hidden;
 
-  animation: guiAppear 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+
+  /* Softer gray/glass frame */
+  background: rgba(255, 255, 255, 0.07);
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  border-radius: 15px;
+
+  box-shadow:
+    inset 0 0 30px rgba(0, 0, 0, 0.15);
+
+  cursor: grab;
+}
+
+.image-frame:active {
+  cursor: grabbing;
 }
 
 
-/* =========================
-   BACKGROUND
-   ========================= */
+/* =========================================================
+   ZOOMABLE IMAGE
+   ========================================================= */
 
-.fullscreen-viewer::backdrop {
-  background: rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(8px);
+.zoomable-image {
+  display: block;
+
+  max-width: 100%;
+  max-height: 100%;
+
+  width: auto;
+  height: auto;
+
+  object-fit: contain;
+
+  user-select: none;
+
+  -webkit-user-drag: none;
+
+  transform-origin: center center;
+
+  transition:
+    transform 0.08s ease-out;
+
+  border-radius: 8px;
+
+  box-shadow:
+    0 10px 30px
+    rgba(0, 0, 0, 0.45);
+
+  cursor: grab;
 }
 
 
-/* =========================
+/* =========================================================
    CLOSE BUTTON
-   ========================= */
+   ========================================================= */
 
-.fullscreen-close {
+.image-viewer-close {
   position: absolute;
 
   top: 15px;
@@ -776,7 +658,8 @@ h1 {
 
   color: white;
 
-  background: rgba(255, 255, 255, 0.1);
+  background:
+    rgba(255, 255, 255, 0.10);
 
   font-size: 24px;
 
@@ -787,193 +670,45 @@ h1 {
   z-index: 20;
 }
 
-.fullscreen-close:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: rotate(90deg);
+.image-viewer-close:hover {
+  background:
+    rgba(255, 255, 255, 0.20);
+
+  transform:
+    rotate(90deg);
 }
 
 
-/* =========================
-   MAIN LAYOUT
-   ========================= */
-
-.image-viewer-layout {
-  display: grid;
-
-  grid-template-columns: 1fr 260px;
-
-  gap: 20px;
-
-  width: 100%;
-  height: 100%;
-}
-
-
-/* =========================
-   IMAGE PREVIEW WINDOW
-   ========================= */
-
-.image-preview-window {
-  position: relative;
-
-  min-width: 0;
-  min-height: 0;
-
-  overflow: hidden;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  background: rgba(0, 0, 0, 0.25);
-
-  border: 1px solid rgba(255, 255, 255, 0.10);
-
-  border-radius: 14px;
-
-  cursor: grab;
-}
-
-.image-preview-window:active {
-  cursor: grabbing;
-}
-
-
-/* =========================
-   IMAGE
-   ========================= */
-
-.zoomable-image {
-  display: block;
-
-  width: auto;
-  height: auto;
-
-  max-width: none;
-  max-height: none;
-
-  user-select: none;
-  -webkit-user-drag: none;
-
-  transform-origin: center center;
-
-  transition: transform 0.08s linear;
-
-  border-radius: 8px;
-
-  box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.45);
-}
-
-
-/* =========================
-   INFORMATION WINDOW
-   ========================= */
-
-.image-info-window {
-  padding: 22px;
-
-  background: rgba(255, 255, 255, 0.07);
-
-  border: 1px solid rgba(255, 255, 255, 0.08);
-
-  border-radius: 14px;
-
-  overflow-y: auto;
-}
-
-.image-info-window h2 {
-  margin-top: 0;
-
-  margin-bottom: 15px;
-
-  padding-right: 30px;
-
-  font-size: 25px;
-}
-
-.image-info-window p {
-  margin: 0;
-
-  opacity: 0.7;
-
-  line-height: 1.6;
-}
-
-
-/* =========================
-   ZOOM CONTROLS
-   ========================= */
-
-.zoom-controls {
-  display: flex;
-
-  justify-content: center;
-
-  gap: 8px;
-
-  margin-top: 18px;
-}
-
-.zoom-button {
-  width: 38px;
-  height: 38px;
-
-  border: 1px solid rgba(255, 255, 255, 0.12);
-
-  border-radius: 10px;
-
-  color: white;
-
-  background: rgba(255, 255, 255, 0.08);
-
-  font-size: 20px;
-
-  cursor: pointer;
-
-  transition: 0.2s;
-}
-
-.zoom-button:hover {
-  background: rgba(255, 255, 255, 0.18);
-}
-
-
-/* =========================
-   ZOOM LEVEL
-   ========================= */
-
-.zoom-level {
-  margin-top: 8px;
-
-  text-align: center;
-
-  font-size: 12px;
-
-  opacity: 0.5;
-}
-
-
-/* =========================
+/* =========================================================
    MOBILE
-   ========================= */
+   ========================================================= */
 
 @media (max-width: 700px) {
 
-  .fullscreen-viewer {
+  .image-viewer-window {
     width: 94vw;
     height: 90vh;
 
     padding: 18px;
+
+    border-radius: 18px;
   }
 
-  .image-viewer-layout {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr auto;
+  .image-viewer-header {
+    padding-right: 45px;
   }
 
-  .image-info-window {
-    max-height: 180px;
+  .image-viewer-header h2 {
+    font-size: 23px;
   }
 
+  .image-viewer-header p {
+    font-size: 14px;
+  }
+
+}
+.image-viewer-window {
+  box-shadow:
+    0 0 0 100vmax rgba(0, 0, 0, 0.65),
+    0 20px 60px rgba(0, 0, 0, 0.5);
 }
